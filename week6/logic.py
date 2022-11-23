@@ -92,20 +92,13 @@ class Human:
                 print("coordinate is out of range")
                 continue
             else:
-                #when the coordinate entered is None, replace it with O or X
                 if board.get(x, y) == None:
                     print("debug", board.get(x, y))
-                    # board[x] = str(board[x][:y])+player+str(board[x][y+1:])
                     board.set(x, y, self.symbol)
                     print(board.__str__())
                     break
                 else:
                     print("already taken")
-        #             player = other_player(player) #update player only when 
-        #         winner = get_winner(board)
-        #         count += 1
-        # return parse_move(input())
-
 
 class Bot:
     def __init__(self, symbol):
@@ -122,5 +115,4 @@ class Bot:
             else:
                 print("already taken")
 
-        # return some_available_square(board)
 

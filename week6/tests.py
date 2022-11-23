@@ -5,47 +5,44 @@ import logic
 
 class TestLogic(unittest.TestCase):
 
-    #testing test_get_winner function by inputting a board and checking if the result equals with the expected result
+    def test_Board(self):
+        #testing board initialization and printing function __str__
+        board = logic.Board()
+        for i in range (0,3):
+            for j in range(0,3):
+                self.assertEqual(board.get(i, j), None)
+        self.assertEqual(board.__str__(), "\n| | | |\n| | | |\n| | | |\n")
+
     def test_get_winner(self):
-        board0 = [
+        board0 = logic.Board()
+        board1 = logic.Board()
+        board2 = logic.Board()
+
+        board0._rows = [
             ['X', None, 'O'],
             [None, 'X', None],
             [None, 'O', 'X'],
         ]
-        board1 = [
+        board1._rows = [
             ['X', "O", 'O'],
             ['X', 'X', "O"],
             [None, 'O', 'O'],
         ]
-        board2 = [
+        board2._rows = [
             ['X', "X", 'O'],
             ["O", 'X', "X"],
             ["X", 'O', 'O'],
         ]
-        self.assertEqual(logic.get_winner(board0), 'X')
-        self.assertEqual(logic.get_winner(board1), 'O')
-        self.assertEqual(logic.get_winner(board2), None)
+        self.assertEqual(board0.get_winner(), 'X')
+        self.assertEqual(board1.get_winner(), 'O')
+        self.assertEqual(board2.get_winner(), None)
 
+    def test_Human(self):
+        player_X = logic.Human('X')
+        self.assertEqual(player_X.symbol, "X")
+        player_O = logic.Human('O')
+        self.assertEqual(player_O.symbol, "O")
 
-    #testing test_other_player function by testing if function returns the other player when a player is given
-    def test_other_player(self):
-        playerO = "O"
-        self.assertEqual(logic.other_player(playerO), "X")
-        playerX = "X"
-        self.assertEqual(logic.other_player(playerX), "O")
-
-   #testing make empty board by checking if each element of the board made is None or not and the size of the board
-    def test_make_empty_board(self):
-        board = logic.make_empty_board()
-        self.assertEqual(len(board), 3)
-        for i in range (0,len(board)):
-            for j in range(0,len(board[i])):
-                self.assertEqual(len(board[i]), 3)
-                self.assertEqual(board[i][j], None)
-
-
-
-
-
+    
 if __name__ == '__main__':
     unittest.main()

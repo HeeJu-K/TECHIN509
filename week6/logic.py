@@ -13,6 +13,7 @@ class Board:
         ]
 
     def __str__(self):
+        #function to print out the board
         s = '\n'
         for row in self._rows:
             for cell in row:
@@ -67,9 +68,11 @@ class Game:
             return self.player_O
     
     def run(self):
+        #runs and controls the game, identifies which player and when to terminate game
         winner = self.board.get_winner()
         count = 0
         while winner == None and count !=9:
+            #continue game if there's no winner yet and board is not full
             next_player = self.get_next_player()
             next_player.get_move(self.board)
             winner = self.board.get_winner()
@@ -81,11 +84,11 @@ class Game:
         return winner
 
 class Human:
-
     def __init__(self, symbol):
         self.symbol = symbol
     def get_move(self, board):
         while True:
+            #check if it's a legal position before placing
             x = input("enter x coordinate :" )
             y = input("enter y coordinate :" )
             if x<0 or x>2 or y<0 or y>2:
@@ -93,7 +96,6 @@ class Human:
                 continue
             else:
                 if board.get(x, y) == None:
-                    print("debug", board.get(x, y))
                     board.set(x, y, self.symbol)
                     print(board.__str__())
                     break
@@ -110,7 +112,6 @@ class Bot:
             if board.get(x, y) == None:
                 board.set(x, y, self.symbol)
                 print(board.__str__())
-
                 break
             else:
                 print("already taken")

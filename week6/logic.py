@@ -3,6 +3,7 @@
 # should be unit-testable.
 
 import random
+import csv
 
 class Board:
     def __init__(self):
@@ -15,7 +16,11 @@ class Board:
     def __str__(self):
         #function to print out the board
         s = '\n'
+        s += "  a b c\n"
+        i = 0
         for row in self._rows:
+            s+=str(i)
+            i += 1
             for cell in row:
                 s = s+'|'
                 if cell == None:
@@ -48,7 +53,40 @@ class Board:
             return "X"
         #when no winners
         return None
+    
+    def writeRank (self, player_id, winner):
 
+        data = [ player_id, winner ]
+        
+        with open('Rank.csv', 'a') as csvfileW:
+            rankWriter = csv.writer(csvfileW)
+            rankWriter.writerow(data)
+            csvfileW.close()
+        return
+    
+    def showRank (self):
+        ranking_board = {}
+        with open ("Rank.csv") as csvfileR:
+            rankReader = csv.reader(csvfileR)
+            for row in rankReader:
+                if not row[0] in ranking_board:
+                    ranking_board[row[0]] = [0, 0, 0, 0] # these datas in turn are total score, # of games won, drawn and lost
+                if row[1] == 'X': #this is when the game is won
+                    ranking_board[row[0]][1] += 1
+                    ranking_board[row[0]][0] += 1
+                elif row[1] == 'O': #this is when the game is lost
+                    ranking_board[row[0]][2] += 1
+                    ranking_board[row[0]][0] -= 1
+                elif row[1] == None:
+                    ranking_board[row[0]][1] += 1
+            # print(ranking_board)
+        #sort
+        sorted_ranking = sorted(ranking_board.items(), key=lambda item: item[1], reverse=True)
+        # print(sorted_ranking)
+        print("----------------\nGlobal Ranking: \n----------------\nPlayer ID | Score\n")
+        for row in sorted_ranking:
+            print(" ", row[0], " | ", row[1][0], "\n")
+        return
 
 class Game:
     def __init__(self, player_X, player_O):
@@ -89,15 +127,23 @@ class Human:
     def get_move(self, board):
         while True:
             #check if it's a legal position before placing
-            x = input("enter x coordinate :" )
-            y = input("enter y coordinate :" )
+            print(board.__str__())
+
+            x = int(input("enter row coordinate :" ))
+            y = input("enter col coordinate :" )
+            # y = input("enter y coordinate :" )
+            if y == "a":
+                y = 0
+            elif y == "b":
+                y = 1
+            elif y == "c":
+                y = 2
             if x<0 or x>2 or y<0 or y>2:
                 print("coordinate is out of range")
                 continue
             else:
                 if board.get(x, y) == None:
                     board.set(x, y, self.symbol)
-                    print(board.__str__())
                     break
                 else:
                     print("already taken")

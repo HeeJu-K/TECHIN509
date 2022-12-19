@@ -1,0 +1,57 @@
+<head>
+    <style>
+        .container {
+            margin-top: 300px;
+            text-align: center;
+            /* font-size: 50px; */
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        .title {
+            font-size: 50px;
+        }
+        .content {
+            font-size: 20px;
+            margin-top: 30px;
+        }
+        .type {
+            height: 35px;
+            width: 200px;
+        }
+        .button{
+            height: 50px;
+            width: 100px;
+            margin-top: 10px;
+            background: white;
+            box-shadow: black;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+    <h1 class="title">Tic Tac Toe</h1>
+    <!-- <p>
+        <label>User name:</label>
+        <input type="text"></input>
+    </p> -->
+    <!-- <div> -->
+        <form id="myform" method="POST" action="http://127.0.0.1:5000/newgame">
+            <div class="content">
+                player 1: <input class="type" type="text" name="username1"/>
+            </div>
+            <div class="content">
+                player 2: <input class="type" type="text" name="username2"/>
+            </div>
+            <div class="content" >Choose number of player</div>
+            <div>
+                <input class="button" type="submit" value="single player" name="player"/>
+            </div>
+            <div>
+                <input class="button" type="submit" value="multi player" name="player"/>
+            </div>
+        </form>
+
+        
+</div>
+</body>

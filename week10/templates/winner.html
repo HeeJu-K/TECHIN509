@@ -1,0 +1,36 @@
+<head>
+    <style>
+        .container {
+            margin-top: 400px;
+            text-align: center;
+            font-size: 50px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+        }
+        .new-game{
+            height: 50px;
+            width: 100px;
+            margin-top: 50px;
+            background: white;
+            box-shadow: black;
+
+        }
+    </style>
+</head>
+
+<div class="container">
+    {% if winner == 'X'%}
+    <div class="win-game"> Congrats, {{username1}}!</div>
+    {% elif winner =='O'%}
+    <div class="lost-game"> Sorry, you lost... {{username1}}</div>
+    {% else %}
+    <div class="tie-game"> Ahh, It's a Tie, {{username1}}!</div>
+    {% endif %}
+    <div >
+        <form id="myform" method="POST" action="http://127.0.0.1:5000/">
+            <div>
+                <input class="new-game" type="submit" value="New Game" name="new playGame" />
+            </div>
+        </form>
+    </div>
+</div>

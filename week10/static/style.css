@@ -1,0 +1,16 @@
+.important {
+	font-size: 200%;
+}
+
+.board-button {
+    height: 100px;
+    width: 100px;
+}
+/* .board-row {
+    border: 1px solid red;
+} */
+.win-game {
+    text-align: center;
+    font-size: 30px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
